@@ -5,7 +5,6 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import ViewShot from 'react-native-view-shot';
 // import { PERMISSIONS} from 'react-native-permissions';
-import * as FileSystem from 'expo-file-system';
 import { ReactMediaLibrary } from 'react-media-library';
 
 
@@ -22,80 +21,6 @@ const QRGenerator = () => {
             setQRValue('')
     };
 
-    // getPermissionAndroid = async () => {
-    //   try {
-    //     const granted = await PermissionsAndroid.request(
-    //       PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-    //       {
-    //         title: 'Image Download Permission',
-    //         message: 'Your permission is required to save images to your device',
-    //         buttonNegative: 'Cancel',
-    //         buttonPositive: 'OK',
-    //       },
-    //     );
-    //     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-    //       return true;
-    //     }
-    //     Alert.alert(
-    //       'Save remote Image',
-    //       'Grant Me Permission to save Image',
-    //       [{text: 'OK', onPress: () => console.log('OK Pressed')}],
-    //       {cancelable: false},
-    //     );
-    //   } catch (err) {
-    //     Alert.alert(
-    //       'Save remote Image',
-    //       'Failed to save Image: ' + err.message,
-    //       [{text: 'OK', onPress: () => console.log('OK Pressed')}],
-    //       {cancelable: false},
-    //     );
-    //   }
-    // };
-
-    // saveQRCode = async () => {
-    //   // if device is android you have to ensure you have permission
-    //   if (Platform.OS === 'android') {
-    //     const granted = await this.getPermissionAndroid();
-    //     if (!granted) {
-    //       return;
-    //     }
-    //   }
-    //   this.setState({saving: true});
-    //   RNFetchBlob.config({
-    //     fileCache: true,
-    //     appendExt: 'png',
-    //   })
-    //     .fetch('GET', this.state.url)
-    //     .then(res => {
-    //       CameraRoll.saveToCameraRoll(res.data, 'photo')
-    //         .then(() => {
-    //           Alert.alert(
-    //             'Save remote Image',
-    //             'Image Saved Successfully',
-    //             [{text: 'OK', onPress: () => console.log('OK Pressed')}],
-    //             {cancelable: false},
-    //           );
-    //         })
-    //         .catch(err => {
-    //           Alert.alert(
-    //             'Save remote Image',
-    //             'Failed to save Image: ' + err.message,
-    //             [{text: 'OK', onPress: () => console.log('OK Pressed')}],
-    //             {cancelable: false},
-    //           );
-    //         })
-    //         .finally(() => this.setState({saving: false}));
-    //     })
-    //     .catch(error => {
-    //       this.setState({saving: false});
-    //       Alert.alert(
-    //         'Save remote Image',
-    //         'Failed to save Image: ' + error.message,
-    //         [{text: 'OK', onPress: () => console.log('OK Pressed')}],
-    //         {cancelable: false},
-    //       );
-    //     });
-    // };
     const saveQRCode = async () => {
       try {
           // Request storage permission (iOS and Android)
