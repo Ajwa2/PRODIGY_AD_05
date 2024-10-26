@@ -9,14 +9,25 @@ import { RNCamera } from 'react-native-camera';
 const QRScanner = () => {
   const navigation = useNavigation()
   const [scanned, setScanned] = useState(false);
+  const [scannedData, setScannedData] = useState(null);
   const [pickedImage, setPickedImage] = useState(null);
 
   const onSuccess = (e) => {
     setScanned(true);
+    setScannedData(e.data);
     console.log('Scanned data:', e.data);
   };
+
+  const handleOpenLink = () => {
+    if (scannedData && Linking.canOpenURL(scannedData)) {
+      Linking.openURL(scannedData).catch(err => console.error('An error occurred', err));
+    } else {
+      alert('Scanned data is not a valid URL');
+    }
+  };
+
   const pickImageFromGallery = async () => {
-    const result = await launchImageLibrary({
+    const result = await ImagePicker.launchImageLibrary({
       mediaType: 'photo',
       quality: 1,
     });
@@ -61,16 +72,24 @@ const QRScanner = () => {
       flashMode={RNCamera.Constants.FlashMode.torch}
       bottomContent={
         <View style={styles.bottomContent}>
-          <Text style={styles.textBottom}>
-            {scanned && 'Scanned: ' + scanned}
-          </Text>
+          {scannedData && (
+            <View style={styles.scannedDataContainer}>
+              <Text style={styles.scannedDataText}>Scanned: {scannedData}</Text>
+              {scannedData.startsWith('http') && (
+                <TouchableOpacity style={styles.openLinkButton} onPress={handleOpenLink}>
+                  <Text style={styles.buttonText}>Open Link</Text>
+                </TouchableOpacity>
+              )}
+            </View>
+          )}
           <TouchableOpacity style={styles.button} onPress={pickImageFromGallery}>
-              <Text style={styles.buttonText}>Pick Image from Gallery</Text>
-            </TouchableOpacity>
-            {pickedImage && (
-              <Image source={{ uri: pickedImage }} style={styles.previewImage} />
-            )}
-        </View>}
+            <Text style={styles.buttonText}>Pick Image from Gallery</Text>
+          </TouchableOpacity>
+          {pickedImage && (
+            <Image source={{ uri: pickedImage }} style={styles.previewImage} />
+          )}
+        </View>
+      }
       />
     </View>
   )

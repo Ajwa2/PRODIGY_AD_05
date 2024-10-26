@@ -14,12 +14,12 @@ const App = () => {
   return (
     <>
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{headerShown:false}}>
-           <Stack.Screen name="Home" component={Home} />
-           <Stack.Screen name="QRGenerator" component={QRGenerator} />
-           <Stack.Screen name="QRScanner" component={QRScanner} />  
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="QRGenerator" component={QRGenerator} />
+          <Stack.Screen name="QRScanner" component={QRScanner} />
         </Stack.Navigator>
-    </NavigationContainer>
+      </NavigationContainer>
     </>
   )
 }
